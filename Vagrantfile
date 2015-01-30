@@ -35,6 +35,7 @@ Vagrant.configure("2") do |config|
     a.vm.provision :shell, :inline => "sudo apt-get update"
     a.vm.provision :shell, :inline => "sudo apt-get install -y ansible"
     a.vm.provision :shell, :inline => "sudo apt-get install -y curl; curl -s https://get.docker.io/ubuntu/ | sudo sh"
+    a.vm.provision :shell, :inline => "git clone https://github.com/csi-projects/demo-ansible-docker.git"
   end
 
 end
