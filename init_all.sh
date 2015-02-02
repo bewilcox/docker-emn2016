@@ -12,4 +12,4 @@ else
 fi
 
 # lancement de la config "paramiko" de Ansible
-ansible-playbook -c paramiko -i hosts playbooks/ssh/setup.yml --ask-pass --sudo
+ansible-playbook -c paramiko -i playbooks/ssh/hosts playbooks/ssh/setup.yml --ask-pass --sudo
