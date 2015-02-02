@@ -17,33 +17,6 @@
   </head>
 
   <body onload="getBackendName()">
-  <script>
-
-    var getBackendName = function() {
-      var hostname = window.location.hostname;
-      var formatterHost;
-      switch (hostname){
-        case '192.168.29.100':
-          formatterHost = "Ansible Server";
-              break;
-        case '192.168.33.10':
-          formatterHost = "Host 0";
-          break;
-        case '192.168.33.11':
-          formatterHost = "Host 1";
-          break;
-        case '192.168.33.12':
-          formatterHost = "Host 2";
-          break;
-        default:
-          formatterHost = hostname;
-      }
-
-
-      document.getElementById('backend_name').innerHTML= formatterHost;
-    };
-    
-  </script>
 
     <div class="site-wrapper">
 
@@ -70,7 +43,7 @@
             <p><img src="images/ansible_docker.png" width="60%" height="60%"></p>
             <p><h1>...</h1></p>
             <div class="lead">
-              Current Backend : <strong><label id="backend_name"></label></strong>
+              Current Backend : <strong><?=gethostname()?></strong>
             </div>
           </div>
 

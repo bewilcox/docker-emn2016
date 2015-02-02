@@ -1,3 +1,3 @@
 #!/bin/sh
 
-sudo docker build --rm=true --tag demo/apache-app .
+sudo docker build --rm=true --tag bewilcox/apache-app .

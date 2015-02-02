@@ -1,31 +1,32 @@
 global
-    daemon
-    maxconn 256
-{% if haproxy_stats_socket %}
-    stats socket {{ haproxy_stats_socket }}
-{% endif %}
+  log 127.0.0.1 local0
+  log 127.0.0.1 local1 notice
+  chroot /var/lib/haproxy
+  user haproxy
+  group haproxy
+  # daemon
 
 defaults
-    mode http
-    timeout connect 5000ms
-    timeout client 50000ms
-    timeout server 50000ms
-
-#listen cluster
-#    bind {{ ansible_eth1['ipv4']['address'] }}:80
-#    mode http
-#    stats enable
-#    stats uri /stats
-#    balance roundrobin
-#{% for backend in groups['web'] %}
-#    server {{ hostvars[backend]['ansible_hostname'] }} {{ hostvars[backend]['ansible_eth1']['ipv4']['address'] }} check inter {{ haproxy_check_interval }} weight {{ hostvars[backend]['haproxy_backend_weight'] }} port 80
-#{% endfor %}
-#    option httpchk HEAD /index.php HTTP/1.0
+  log global
+  mode http
+  option httplog
+  option dontlognull
+  contimeout 5000
+  clitimeout 50000
+  srvtimeout 50000
+  errorfile 400 /etc/haproxy/errors/400.http
+  errorfile 403 /etc/haproxy/errors/403.http
+  errorfile 408 /etc/haproxy/errors/408.http
+  errorfile 500 /etc/haproxy/errors/500.http
+  errorfile 502 /etc/haproxy/errors/502.http
+  errorfile 503 /etc/haproxy/errors/503.http
+  errorfile 504 /etc/haproxy/errors/504.http
 
 listen cluster :80
-  balance roundrobin
-  stats enable
-  stats uri /stats
+    balance roundrobin
 {% for backend in groups['web'] %}
     server {{ hostvars[backend]['ansible_hostname'] }} {{ hostvars[backend]['ansible_eth1']['ipv4']['address'] }}:80 check
 {% endfor %}
+    stats enable
+    stats uri /stats
+    option httpchk HEAD /index.php HTTP/1.0
