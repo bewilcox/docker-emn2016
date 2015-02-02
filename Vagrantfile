@@ -19,7 +19,10 @@ Vagrant.configure("2") do |config|
       machine.vm.provider "virtualbox" do |v|
           v.customize ["modifyvm", :id, "--memory", 200]
       end
+      # Needed dependencies to use the Ansible Docker module
       machine.vm.provision :shell, :inline => "sudo apt-get install -y curl; curl -s https://get.docker.io/ubuntu/ | sudo sh"
+      machine.vm.provision :shell, :inline => "sudo apt-get install -y python-pip"
+      machine.vm.provision :shell, :inline => "sudo pip install docker-py"
     end
   end
 
