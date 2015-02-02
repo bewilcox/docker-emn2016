@@ -1,0 +1,3 @@
+# Run the image
+- name: Deploy and run the container for the application (Apache)
+  docker: image=bewilcox/apache-app name=app ports=80:80 state=running

@@ -11,13 +11,21 @@ defaults
     timeout client 50000ms
     timeout server 50000ms
 
-listen cluster
-    bind {{ ansible_eth1['ipv4']['address'] }}:80
-    mode http
-    stats enable
-    stats uri /stats
-    balance roundrobin
+#listen cluster
+#    bind {{ ansible_eth1['ipv4']['address'] }}:80
+#    mode http
+#    stats enable
+#    stats uri /stats
+#    balance roundrobin
+#{% for backend in groups['web'] %}
+#    server {{ hostvars[backend]['ansible_hostname'] }} {{ hostvars[backend]['ansible_eth1']['ipv4']['address'] }} check inter {{ haproxy_check_interval }} weight {{ hostvars[backend]['haproxy_backend_weight'] }} port 80
+#{% endfor %}
+#    option httpchk HEAD /index.php HTTP/1.0
+
+listen cluster :80
+  balance roundrobin
+  stats enable
+  stats uri /stats
 {% for backend in groups['web'] %}
-    server {{ hostvars[backend]['ansible_hostname'] }} {{ hostvars[backend]['ansible_eth1']['ipv4']['address'] }} check inter {{ haproxy_check_interval }} weight {{ hostvars[backend]['haproxy_backend_weight'] }} port 80
+    server {{ hostvars[backend]['ansible_hostname'] }} {{ hostvars[backend]['ansible_eth1']['ipv4']['address'] }}:80 check
 {% endfor %}
-    option httpchk HEAD /index.php HTTP/1.0

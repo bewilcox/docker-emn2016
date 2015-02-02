@@ -8,7 +8,7 @@ hosts = {
 }
 
 Vagrant.configure("2") do |config|
-  
+
 
   hosts.each do |name, ip|
     config.vm.define name do |machine|
@@ -39,6 +39,3 @@ Vagrant.configure("2") do |config|
   end
 
 end
-
-
-

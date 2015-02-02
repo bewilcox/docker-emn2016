@@ -10,4 +10,4 @@
 
 # Run the image
 - name: Deploy and run the haproxy
-  docker: image=demo/haproxy name=haproxy ports=80:80 state=running
+  docker: image=bewilcox/haproxy name=haproxy ports=80:80 volumes=/etc/haproxy/:/haproxy-override state=running
