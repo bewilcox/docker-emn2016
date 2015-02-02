@@ -16,7 +16,7 @@
     <link href="css/cover.css" rel="stylesheet">
   </head>
 
-  <body onload="getBackendName()">
+  <body>
 
     <div class="site-wrapper">
 

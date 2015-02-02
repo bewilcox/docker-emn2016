@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
       machine.vm.hostname = name
       machine.vm.network :private_network, ip: ip
       machine.vm.provider "virtualbox" do |v|
-          v.customize ["modifyvm", :id, "--memory", 200]
+          v.customize ["modifyvm", :id, "--memory", 1024]
       end
       # Needed dependencies to use the Ansible Docker module
       machine.vm.provision :shell, :inline => "sudo apt-get install -y curl; curl -s https://get.docker.io/ubuntu/ | sudo sh"
@@ -39,6 +39,9 @@ Vagrant.configure("2") do |config|
     a.vm.provision :shell, :inline => "sudo apt-get install -y ansible"
     a.vm.provision :shell, :inline => "sudo apt-get install -y curl; curl -s https://get.docker.io/ubuntu/ | sudo sh"
     a.vm.provision :shell, :inline => "git clone https://github.com/csi-projects/demo-ansible-docker.git"
+    a.vm.provider "virtualbox" do |v|
+        v.customize ["modifyvm", :id, "--memory", 1024]
+    end
   end
 
 end

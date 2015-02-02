@@ -10,4 +10,4 @@
 
 # Run the image
 - name: Deploy and run the haproxy
-  docker: image=bewilcox/haproxy name=haproxy ports=80:80 volumes=/home/vagrant/:/haproxy-override state=running
+  docker: image=dockerfile/haproxy name=haproxy ports=80:80 volumes=/home/vagrant/:/haproxy-override state=running
