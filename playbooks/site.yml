@@ -1,7 +1,0 @@
-- hosts: web
-  roles:
-    - { role: apache-app }
-
-- hosts: haproxy
-  roles:
-    - { role: haproxy }
