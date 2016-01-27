@@ -1,5 +1,10 @@
 # EMN2016 - Utilisation de Docker
 
+## Prérequis
+
+* Récupérer les ressources binaires présentes sur la clé USB (tomcat et jdk)
+* Les copier dans le répertoire **tomcat**
+
 ## Manipulation du Dockerfile
 
 Avec l'aide de la documentation en ligne sur la création d'un ficher Dockerfile et des examples dans le support de présentation, nous créons une image pour mettre en place un serveur Tomcat qui répond à la procédure d'installation suivante :
